@@ -1,12 +1,18 @@
-const myLibrary = [];
+let myLibrary = []; 
 
-function Book (title, author, pages, type) {
+function Book (title, author, pages, type,read = false) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.type = type;
+    this.read = read;
 }
+
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read; 
+};
+
 
 
 function addBooksToLibrary (){
@@ -51,6 +57,8 @@ table.innerHTML = "";
     
     const row = document.createElement("tr");
 
+    row.setAttribute("data-id", book.id);
+
      const tdId = document.createElement("td");
     tdId.classList.add("data");
     tdId.textContent = book.id ;
@@ -76,6 +84,49 @@ table.innerHTML = "";
     tdType.textContent = book.type ;
     row.appendChild(tdType);
 
+
+    const tdAction = document.createElement("td");
+    tdAction.classList.add("data");
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = "delete";
+    deleteButton.style.backgroundColor = "red";
+    deleteButton.style.color = "white";
+
+
+       deleteButton.addEventListener("click", () => {
+        
+          const bookIdToDelete = row.getAttribute("data-id");
+
+          myLibrary = myLibrary.filter(item => item.id !== bookIdToDelete);
+        
+          row.remove();
+    });
+
+
+
+       const tdStatus = document.createElement("td");
+    tdStatus.classList.add("data");
+
+    const statusButton = document.createElement("button");
+    
+    statusButton.textContent = book.read ? "Read" : "Not Read";
+    statusButton.style.backgroundColor = book.read ? "green" : "orange";
+    statusButton.style.color = "white";
+
+    statusButton.addEventListener("click", () => {
+        book.toggleReadStatus();
+
+        statusButton.textContent = book.read ? "Read" : "Not Read";
+        statusButton.style.backgroundColor = book.read ? "green" : "orange";
+    });
+
+
+     tdStatus.appendChild(statusButton);
+    row.appendChild(tdStatus);
+
+     tdAction.appendChild(deleteButton);
+      row.appendChild(tdAction); 
      table.appendChild(row);
 
 })};
@@ -83,6 +134,8 @@ table.innerHTML = "";
 button.addEventListener("click", ()  =>  {
     displayBook();
 });
+
+
 
 
 // add button for new books
@@ -172,6 +225,6 @@ container.appendChild(formButton);
 formButton.addEventListener ("click", () => {
 
     addNewBook();
-
-
 });
+
+
