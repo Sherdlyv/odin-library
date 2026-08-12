@@ -83,3 +83,95 @@ table.innerHTML = "";
 button.addEventListener("click", ()  =>  {
     displayBook();
 });
+
+
+// add button for new books
+
+function addNewBook (){
+
+    const form = document.createElement('form');
+    form.id = "book-form";
+
+    const labelTitle = document.createElement('label');
+    labelTitle.textContent = "Title";
+
+    const inputTitle = document.createElement('input');
+    inputTitle.type ="text";
+    inputTitle.id = "input-title";
+
+    const labelAuthor = document.createElement('label');
+    labelAuthor.textContent = "Author";
+    const inputAuthor = document.createElement('input');
+    inputAuthor.type = "text";
+    inputAuthor.author ="input-author";
+
+     const labelPages = document.createElement('label');
+    labelPages.textContent = "Pages";
+    const inputPages= document.createElement('input');
+    inputPages.type = "number";
+    inputPages.pages="input-pages";
+
+     const labelType = document.createElement('label');
+    labelType.textContent = "Type";
+    const inputType= document.createElement('input');
+    inputType.type = "text";
+    inputType.type="input-type";
+
+    const submitBtn = document.createElement('button');
+    submitBtn.type = "submit";
+    submitBtn.textContent = "Add Book";
+
+   form.appendChild(labelTitle);
+    form.appendChild(inputTitle);
+    
+    form.appendChild(labelAuthor);
+    form.appendChild(inputAuthor);
+    
+    form.appendChild(labelPages);
+    form.appendChild(inputPages);
+    
+    form.appendChild(labelType);
+    form.appendChild(inputType);
+    
+    form.appendChild(submitBtn);
+    
+     container.appendChild(form);
+
+     form.addEventListener("submit", (e) => {
+        e.preventDefault(); 
+
+        
+        const title = inputTitle.value;
+        const author = inputAuthor.value;
+        const pages = parseInt(inputPages.value) || 0; 
+        const type = inputType.value;
+
+        
+        const newBook = new Book(title, author, pages, type);
+
+        
+        myLibrary.push(newBook);
+
+        
+        form.reset();
+
+        
+        displayBook(); 
+    });
+
+}
+
+const formButton = document.createElement('button');
+
+formButton.style.color = "Blue";
+
+formButton.textContent = "New Book"
+
+container.appendChild(formButton);
+
+formButton.addEventListener ("click", () => {
+
+    addNewBook();
+
+
+});

@@ -9,3 +9,11 @@ table{
 tr{
     border-bottom: 3px solid blue;
 }
+
+#book-form{
+    margin-top: 10px;
+    display: grid;
+    width: 50%;
+    height: 50%;
+    border: 2px solid blue;
+}
