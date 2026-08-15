@@ -1,18 +1,26 @@
 let myLibrary = []; 
 
-function Book (title, author, pages, type,read = false) {
-    this.id = crypto.randomUUID();
+// creation of class Book
+class Book{
+
+     #id;
+    constructor(title,author,pages,type, read=false){
+     this.#id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.type = type;
     this.read = read;
+    }
+
+    get id() {
+    return this.#id;
 }
 
-Book.prototype.toggleReadStatus = function() {
-    this.read = !this.read; 
-};
-
+    toggleReadStatus (){
+        this.read = !this.read; 
+    }
+}
 
 
 function addBooksToLibrary (){

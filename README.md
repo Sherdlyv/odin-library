@@ -16,3 +16,7 @@ A lightweight web app to manage a personal book collection, built as part of **T
 - `index.html`: Semantic shell for the data grid.
 - `styles.css`: Container scaling.
 - `script.js`: State management and event orchestration.
+
+## Author
+
+Sherdly Verne
